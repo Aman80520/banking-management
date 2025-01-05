@@ -26,6 +26,12 @@ public class EmployeeController {
 	this.employeeService = employeeService;
 	}
 
+	
+	@GetMapping("/s")
+	public ResponseEntity<String> getTest(){
+		return ResponseEntity.ok("Docker File running successfully");
+		
+	}
 
 
 	@PostMapping("/save")
