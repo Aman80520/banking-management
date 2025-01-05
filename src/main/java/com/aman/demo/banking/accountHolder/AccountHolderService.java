@@ -7,6 +7,7 @@ import com.aman.demo.banking.serviceImpl.Loan;
 public interface AccountHolderService {
 	AccountUser saveAccountUser(AccountUser accountUser);
 	AccountUser getAccountById(Long accountId);
+	List<AccountUser> getLoanByAccountnum(Long accountnum,AccountUser accountUser);
 	List<AccountUser> getAllAccountHolder();
 	boolean deleteByAccountId(Long accountId);
 	AccountUser updateAccountUserDetails(AccountUser accountUser,Long accountId);

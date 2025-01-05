@@ -54,6 +54,19 @@ public class AccountHolderController {
 		
 		
 	}
+	
+	@GetMapping("/accountnumber/{accountNumber}")
+	public ResponseEntity<List<AccountUser>> getbyAccountnumber(@PathVariable Long accountNumber){
+		 List<AccountUser> loanByAccountnum = accountHolderService.getLoanByAccountnum(accountNumber, null);
+		
+		if (loanByAccountnum!=null) {
+			return new ResponseEntity<>(loanByAccountnum,HttpStatus.FOUND);	
+		}else
+		return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		
+		
+	}
+	
 	@DeleteMapping("/{accountId}")
 	public ResponseEntity<String> deletebyAccountid(@PathVariable Long accountId){
 		

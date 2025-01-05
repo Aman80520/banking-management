@@ -35,10 +35,13 @@ public class AccountHoldeeServiceImpl implements AccountHolderService{
 
 	@Override
 	public AccountUser getAccountById(Long accountId) {
-		Optional<AccountUser> byId = accountHolderRepository.findById(accountId);
+		Optional<AccountUser> byId = Optional.ofNullable(accountHolderRepository.findById(accountId).orElseThrow(()->new ResourceNotFoundException("Not avilable "+accountId)));
 		
+		AccountUser accountUser = byId.get();
+		accountUser.setLoan(loanclient.getLoanByAccId(accountUser.getAccountNumber()));
 		
-		return byId.orElseThrow(()->new ResourceNotFoundException("the accountid is not present in the database"+accountId));
+		return accountUser;
+		//return byId.orElseThrow(()->new ResourceNotFoundException("the accountid is not present in the database"+accountId));
 	}
 
 	@Override
@@ -118,6 +121,14 @@ public class AccountHoldeeServiceImpl implements AccountHolderService{
 		return loanByAccId;
 	}
 
+	@Override
+	public List<AccountUser>getLoanByAccountnum(Long accountnum,AccountUser accountUser) {
+		List<AccountUser> byAccountNumber = accountHolderRepository.findByAccountNumber(accountnum);
+		
+//		accountUser.getAccountNumber();
+//		((AccountUser) byAccountNumber).setLoan(loanclient.getLoanByAccId(accountUser.getAccountNumber()));
+		return byAccountNumber;
+	}
 //	@Override
 //	public List<AccountUser> findByAccont(Long accountNumber) {
 //		List<AccountUser> byAccountNumber = accountHolderRepository.findByAccountNumber(accountNumber);

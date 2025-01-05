@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface AccountHolderRepository extends JpaRepository<AccountUser, Long> {
 	
-	//List<AccountUser> findByAccountNumber(Long accountNumber);
+	List<AccountUser> findByAccountNumber(Long accountNumber);
 
 }
